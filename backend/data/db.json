@@ -1,0 +1,192 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Dorflex",
+      "preco": 19.90,
+      "imagem": "./media/dorflex.png",
+      "categoria": 1
+    },
+    {
+      "id": 2,
+      "nome": "Buscopan",
+      "preco": 14.5,
+      "imagem": "./media/buscopan.png",
+      "categoria": 1
+    },
+    {
+      "id": 3,
+      "nome": "Dipirona",
+      "preco": 12,
+      "imagem": "./media/dipirona.png",
+      "categoria": 1
+    },
+    {
+      "id": 4,
+      "nome": "Paracetamol",
+      "preco": 24.9,
+      "imagem": "./media/paracetamol.png",
+      "categoria": 1
+    },
+    {
+      "id": 5,
+      "nome": "Loratadina",
+      "preco": 31.40,
+      "imagem": "./media/loratadina.png",
+      "categoria": 1
+    },
+    {
+      "id": 6,
+      "nome": "BCAA",
+      "preco": 19.90,
+      "imagem": "./media/bcaa.png",
+      "categoria": 2
+    },
+    {
+      "id": 7,
+      "nome": "Colágeno",
+      "preco": 49.90,
+      "imagem": "./media/colageno.png",
+      "categoria": 2
+    },
+    {
+      "id": 8,
+      "nome": "Vitamina C",
+      "preco": 35,
+      "imagem": "./media/vitaminaC.png",
+      "categoria": 2
+    },
+    {
+      "id": 9,
+      "nome": "Vitamina D",
+      "preco": 35,
+      "imagem": "./media/vitaminaD.png",
+      "categoria": 2
+    },
+    {
+      "id": 10,
+      "nome": "Fralda",
+      "preco": 84.90,
+      "imagem": "./media/fralda.png",
+      "categoria": 3
+    }
+  ],
+  "farmacias": [
+    {
+      "id": 1,
+      "nome": "Drogaria Saúde Máxima",
+      "email": "1@email.com",
+      "senha": "a",
+      "cnpj": "1",
+      "telefone": "a",
+      "endereco": "a",
+      "fotoPerfil": "./media/drog_saude.png",
+      "avaliacao": 4.8,
+      "taxa": "R$ 5,00",
+      "tempoEntrega": "15-25 min",
+      "status": "Aberto agora",
+      "produtos": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Farmácia Central",
+      "email": "2@email.com",
+      "senha": "a",
+      "cnpj": "2",
+      "telefone": "a",
+      "endereco": "a",
+      "fotoPerfil": "./media/farma_central.png",
+      "avaliacao": 4.5,
+      "taxa": "Grátis",
+      "tempoEntrega": "20-30 min",
+      "status": "Fechado",
+      "produtos": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Farmácia Popular",
+      "email": "3@email.com",
+      "senha": "a",
+      "cnpj": "3",
+      "telefone": "a",
+      "endereco": "a",
+      "fotoPerfil": "./media/farma_central.png",
+      "avaliacao": 4.2,
+      "taxa": "R$ 3,50",
+      "tempoEntrega": "10-20 min",
+      "status": "Aberto agora",
+      "produtos": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": 4,
+      "email": "4@email.com",
+      "senha": "a",
+      "nome": "BioFarma Delivery",
+      "cnpj": "4",
+      "telefone": "a",
+      "endereco": "a",
+      "fotoPerfil": "./media/bio_deli.png",
+      "avaliacao": 4.9,
+      "taxa": "R$ 7,00",
+      "tempoEntrega": "25-40 min",
+      "status": "Aberto agora",
+      "produtos": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "email": "ana@email.com",
+      "senha": "123",
+      "nome": "Ana Maria de Souza",
+      "cpf": "12345678900",
+      "telefone": "123456789",
+      "endereco": "Rua Dr. Vila Nova, 228, 7º andar, São Paulo, SP",
+      "fotoPerfil": "./media/cliente.png"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pedido Confirmado! - Minha Farmácia Delivery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="media/icon.png" />
+  </head>
+  <body>
+    <header class="cabecalho cabecalho-balanceado">
+      <a href="carrinho.html" class="voltar-nav"
+        ><i class="fas fa-arrow-left"></i> Voltar</a
+      >
+      <div class="cabecalho-centro">
+        <h2 class="cabecalho-titulo">Finalizar Compra</h2>
+      </div>
+      <div class="loginCadastro cabecalho-apoio cabecalho-apoio-direita"></div>
+    </header>
+
+    <main class="container">
+      <div class="sucesso-card">
+        <i class="fas fa-check-circle"></i>
+        <h1>Pedido Confirmado com Sucesso!</h1>
+        <p>
+          Obrigado por sua compra! Seu pedido foi processado e está sendo
+          preparado pela farmácia parceira.
+        </p>
+        <div class="pedido-info">
+          <p><strong>Número do Pedido:</strong> #MFD-202500147</p>
+          <p><strong>Total Pago:</strong> <span class="total">R$ 0,00</span></p>
+          <p><strong>Previsão de Entrega:</strong> 30 a 45 minutos</p>
+        </div>
+        <div class="btn-sucesso">
+          <a href="index.html" class="btn-acao btn-principal">
+            <i class="fas fa-shopping-basket"></i> Continuar Comprando
+          </a>
+          <a href="#" class="btn-acao btn-secundario">
+            <i class="fas fa-receipt"></i> Ver Detalhes do Pedido
+          </a>
+        </div>
+      </div>
+      <script>
+        const total = localStorage.getItem("checkoutTotal");
+        if (total) {
+          const totalFormatado = Number(total).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+          document.querySelector(".pedido-info span.total").innerText =
+            totalFormatado;
+        }
+      </script>
+    </main>
+    <script src="auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Finalizar Compra - Minha Farmácia Delivery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="media/icon.png" />
+  </head>
+  <body>
+    <header class="cabecalho cabecalho-balanceado">
+      <a href="carrinho.html" class="voltar-nav"
+        ><i class="fas fa-arrow-left"></i> Voltar</a
+      >
+      <div class="cabecalho-centro">
+        <h2 class="cabecalho-titulo">Finalizar Compra</h2>
+      </div>
+      <div class="loginCadastro cabecalho-apoio cabecalho-apoio-direita"></div>
+    </header>
+
+    <main class="container" id="carrinho">
+      <div class="carrinho-layout">
+        <section class="carrinho-itens-section">
+          <h3><i class="fas fa-credit-card"></i> Forma de Pagamento</h3>
+
+          <form class="cadastro-form" onsubmit="return false;">
+            <div class="mp-form-group">
+              <label for="mp-metodo-pagamento">Selecione o Método</label>
+              <select id="mp-metodo-pagamento" required>
+                <option value="">Selecione...</option>
+                <option value="pix">PIX</option>
+                <option value="credito">Cartão de Crédito</option>
+                <option value="debito">Cartão de Débito</option>
+                <option value="boleto">Boleto Bancário</option>
+              </select>
+            </div>
+
+            <div id="campos-cartao">
+              <h4>Dados do Cartão</h4>
+
+              <div class="form-group">
+                <label for="nome-cartao">Nome no Cartão</label>
+                <input
+                  type="text"
+                  id="nome-cartao"
+                  placeholder="Nome Completo"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="numero-cartao">Número do Cartão</label>
+                <input
+                  type="text"
+                  id="numero-cartao"
+                  placeholder="XXXX XXXX XXXX XXXX"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <div>
+                  <label for="validade">Validade</label>
+                  <input
+                    type="text"
+                    id="validade"
+                    placeholder="MM/AA"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="cvv">CVV</label>
+                  <input type="text" id="cvv" placeholder="123" required />
+                </div>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="checkout-summary-section">
+          <h3><i class="fas fa-calculator"></i> Resumo da Compra</h3>
+
+          <table class="resumo-pedido">
+            <tr>
+              <th>Subtotal (<span id="qtd-itens">0</span> itens)</th>
+              <td id="subtotal">R$ 0,00</td>
+            </tr>
+
+            <tr>
+              <th>Frete</th>
+              <td id="frete">R$ 0,00</td>
+            </tr>
+
+            <tr>
+              <th>Taxa de Serviço</th>
+              <td id="taxa-servico">R$ 0,00</td>
+            </tr>
+
+            <tr>
+              <th>Desconto (Cupom)</th>
+              <td id="desconto" style="color: #28a745">- R$ 0,00</td>
+            </tr>
+
+            <tr class="total-line">
+              <th>Total a Pagar</th>
+              <td id="total-final">R$ 0,00</td>
+            </tr>
+          </table>
+
+          <a href="sucesso.html" class="btn-pagar">
+            <i class="fas fa-check-circle"></i> Confirmar e Pagar
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const FRETE = 0.0;
+      const TAXA_SERVICO = 5.0;
+      const DESCONTO_CUPOM = 10.0;
+
+      function formatBR(v) {
+        return v.toFixed(2).replace(".", ",");
+      }
+
+      function carregarResumo() {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+        const subtotal = carrinho.reduce(
+          (s, it) => s + it.preco * it.quantidade,
+          0,
+        );
+        const totalItens = carrinho.reduce((s, it) => s + it.quantidade, 0);
+
+        const totalFinal = Math.max(
+          0,
+          subtotal + FRETE + TAXA_SERVICO - DESCONTO_CUPOM,
+        );
+
+        document.getElementById("qtd-itens").textContent = totalItens;
+        document.getElementById("subtotal").textContent =
+          "R$ " + formatBR(subtotal);
+        document.getElementById("frete").textContent = "R$ " + formatBR(FRETE);
+        document.getElementById("taxa-servico").textContent =
+          "R$ " + formatBR(TAXA_SERVICO);
+        document.getElementById("desconto").textContent =
+          "- R$ " + formatBR(DESCONTO_CUPOM);
+        document.getElementById("total-final").textContent =
+          "R$ " + formatBR(totalFinal);
+        localStorage.setItem("checkoutTotal", totalFinal);
+      }
+      carregarResumo();
+    </script>
+
+    <script src="auth.js"></script>
+  </body>
+</html>

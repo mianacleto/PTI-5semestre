@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minha Farmácia Delivery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="media\icon.png" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <a class="logo" href="index.html">
+        <img src="/media/icon.png" />
+        <p class="logo-text">Minha <span>Farmácia</span><span>Delivery</span></p>
+      </a>
+      <div class="cabecalho-centro">
+        <a
+          href="mapa.html"
+          class="nav-atalho"
+          aria-label="Abrir mapa de farmácias"
+        >
+          <i class="fas fa-map-location-dot"></i>
+          <span>Mapa</span>
+        </a>
+        <div class="busca">
+          <input type="text" placeholder="Buscar farmácias ou produtos..." />
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <div class="loginCadastro"></div>
+    </header>
+
+    <main class="container">
+      <section class="categorias">
+        <div class="categoria-item">💊 Medicamentos</div>
+        <div class="categoria-item">🧴 Higiene Pessoal</div>
+        <div class="categoria-item">💪 Vitaminas e Suplementos</div>
+        <div class="categoria-item">👶 Infantil</div>
+        <div class="categoria-item">🎀 Beleza</div>
+      </section>
+
+      <h1>Farmácias Próximas</h1>
+
+      <div
+        class="carrinho-flutuante"
+        id="carrinhoFlutuante"
+        onclick="window.location.href = 'carrinho.html'"
+      >
+        <i class="fas fa-shopping-cart"></i>
+        <span>0 produtos | R$ 0,00</span>
+      </div>
+
+      <section class="farmacia-list" id="lista-farmacias"></section>
+      <script>
+        async function carregarFarmacias() {
+          const response = await fetch("/farmacias");
+          const farmacias = await response.json();
+
+          const container = document.getElementById("lista-farmacias");
+          container.innerHTML = "";
+
+          farmacias.forEach((f) => {
+            const link = document.createElement("a");
+            link.href = `farmacia.html?id=${f.id}`;
+            link.classList.add("farmacia-card-link");
+
+            link.innerHTML = `
+                    <div class="farmacia-card">
+                    <img src="${f.fotoPerfil}" style="border-style: none;" alt="Logo ${f.nome}" class="farmacia-logo">
+                    <div class="farmacia-info">
+                        <h2>${f.nome}</h2>
+                        <p class="detalhes">
+                        <i class="fas fa-star" style="color: gold;"></i> ${f.avaliacao}
+                        | Taxa: ${f.taxa}
+                        | ${f.tempoEntrega}
+                        </p>
+                        <p class="detalhes" style="color: ${f.status.includes("Fechado") ? "#dc3545" : "#28a745"}; font-weight: bold;">
+                            <i class="fas fa-clock"></i> ${f.status}
+                        </p>
+                    </div>
+                    </div>
+                `;
+
+            container.appendChild(link);
+          });
+        }
+        carregarFarmacias();
+      </script>
+    </main>
+    <script src="carrinho.js"></script>
+    <script src="auth.js"></script>
+  </body>
+</html>

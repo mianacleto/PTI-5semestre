@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa de Farmácias</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="icon" type="image/png" href="media\icon.png" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <a class="logo" href="index.html">
+        <img src="/media/icon.png" alt="Minha Farmácia Delivery" />
+        <p class="logo-text">
+          Minha <span>Farmácia</span><span>Delivery</span>
+        </p>
+      </a>
+      <div class="cabecalho-centro">
+        <div class="busca">
+          <input
+            type="text"
+            placeholder="Buscar farmácias..."
+            id="campoBuscaMapa"
+          />
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <div class="loginCadastro"></div>
+    </header>
+
+    <main class="container mapa-page">
+      <section class="mapa-topo">
+        <div>
+          <h1>Farmácias Disponíveis na Sua Região</h1>
+        </div>
+      </section>
+
+      <section class="mapa-layout">
+        <aside class="mapa-painel">
+          <div class="mapa-painel-titulo">
+            <h2>Unidades</h2>
+            <span id="contadorFarmacias">0 farmácias</span>
+          </div>
+          <div class="mapa-lista" id="listaFarmaciasMapa"></div>
+        </aside>
+        <section class="mapa-canvas-wrap">
+          <div id="map"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      const coordenadasFallback = [
+        [-23.993, -46.256],
+        [-23.992, -46.2572],
+        [-23.996, -46.2548],
+        [-23.995, -46.2529],
+      ];
+
+      const map = L.map("map").setView([-23.9699, -46.3282], 13);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      const markers = [];
+      let farmaciasCache = [];
+
+      function obterCoordenada(index) {
+        return (
+          coordenadasFallback[index] ||
+          coordenadasFallback[coordenadasFallback.length - 1]
+        );
+      }
+
+      function renderizarLista(farmacias) {
+        const lista = document.getElementById("listaFarmaciasMapa");
+        const contador = document.getElementById("contadorFarmacias");
+
+        contador.textContent = `${farmacias.length} farmácia${farmacias.length === 1 ? "" : "s"}`;
+        lista.innerHTML = "";
+
+        if (farmacias.length === 0) {
+          lista.innerHTML =
+            '<p class="mapa-vazio">Nenhuma farmácia encontrada para essa busca.</p>';
+          return;
+        }
+
+        farmacias.forEach((farmacia) => {
+          const item = document.createElement("button");
+          item.className = "mapa-item";
+          item.type = "button";
+          item.innerHTML = `
+                    <img src="${farmacia.fotoPerfil}" alt="Logo ${farmacia.nome}" class="farmacia-logo">
+                    <div class="mapa-item-info">
+                        <strong>${farmacia.nome}</strong>
+                        <span><i class="fas fa-star"></i> ${farmacia.avaliacao} | ${farmacia.tempoEntrega}</span>
+                        <span class="mapa-status ${farmacia.status.includes("Fechado") ? "fechado" : "aberto"}">${farmacia.status}</span>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                `;
+
+          item.addEventListener("click", () => {
+            map.setView(farmacia.coords, 15);
+            farmacia.marker.openPopup();
+          });
+
+          lista.appendChild(item);
+        });
+      }
+
+      function atualizarMarkers(farmacias) {
+        markers.forEach((marker) => map.removeLayer(marker));
+        markers.length = 0;
+
+        farmacias.forEach((farmacia) => {
+          const marker = L.marker(farmacia.coords).addTo(map);
+          marker.bindPopup(`
+                    <div class="mapa-popup">
+                        <strong>${farmacia.nome}</strong><br>
+                        <span>${farmacia.taxa} | ${farmacia.tempoEntrega}</span><br>
+                        <a href="farmacia.html?id=${farmacia.id}">Abrir farmácia</a>
+                    </div>
+                `);
+          farmacia.marker = marker;
+          markers.push(marker);
+        });
+
+        if (farmacias.length > 0) {
+          const group = L.featureGroup(markers);
+          map.fitBounds(group.getBounds().pad(0.18));
+        }
+      }
+
+      function aplicarBusca() {
+        const termo = document
+          .getElementById("campoBuscaMapa")
+          .value.trim()
+          .toLowerCase();
+        const filtradas = farmaciasCache.filter((farmacia) => {
+          return farmacia.nome.toLowerCase().includes(termo);
+        });
+
+        renderizarLista(filtradas);
+        atualizarMarkers(filtradas);
+      }
+
+      async function carregarMapa() {
+        const resposta = await fetch("/farmacias");
+        const farmacias = await resposta.json();
+
+        farmaciasCache = farmacias.map((farmacia, index) => ({
+          ...farmacia,
+          coords: obterCoordenada(index),
+        }));
+
+        renderizarLista(farmaciasCache);
+        atualizarMarkers(farmaciasCache);
+      }
+
+      document
+        .getElementById("campoBuscaMapa")
+        .addEventListener("input", aplicarBusca);
+      carregarMapa();
+    </script>
+    <script src="auth.js"></script>
+  </body>
+</html>

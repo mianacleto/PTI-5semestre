@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="media/icon.png" />
+  </head>
+  <body>
+    <header class="cabecalho cabecalho-balanceado">
+      <a class="logo" href="index.html">
+        <img src="/media/icon.png" />
+        <p class="logo-text">Minha <span>Farmácia</span><span>Delivery</span></p>
+      </a>
+      <div class="cabecalho-centro">
+        <h2 class="cabecalho-titulo">Painel do Fornecedor</h2>
+      </div>
+      <div class="loginCadastro cabecalho-apoio cabecalho-apoio-direita"></div>
+    </header>
+
+    <div class="admin-layout">
+      <aside class="sidebar">
+        <nav class="sidebar-menu">
+          <a href="#" class="active-link" data-target="dashboard"
+            ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+          >
+          <a href="#" data-target="farmacia"
+            ><i class="fas fa-store"></i> Minha Farmácia</a
+          >
+          <a href="#" data-target="produtos"
+            ><i class="fas fa-box-open"></i> Gestão de Produtos</a
+          >
+          <a href="#" data-target="estoque"
+            ><i class="fas fa-boxes"></i> Gestão de Estoque</a
+          >
+          <a href="#" data-target="pedidos"
+            ><i class="fas fa-truck"></i> Gestão de Pedidos</a
+          >
+          <a href="#" data-target="clientes"
+            ><i class="fas fa-users"></i> Clientes</a
+          >
+          <a href="#" data-target="cupons"
+            ><i class="fas fa-tag"></i> Cupons e Promoções</a
+          >
+          <a href="#" data-target="relatorios"
+            ><i class="fas fa-chart-line"></i> Relatórios</a
+          >
+          <a href="#" data-target="configuracoes"
+            ><i class="fas fa-cog"></i> Configurações</a
+          >
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <div id="content-area">
+          <div id="dashboard" class="content-panel active">
+            <h1>Visão Geral do Painel</h1>
+
+            <section class="dashboard-grid">
+              <div class="fornecedor-card widget">
+                <h4>Vendas Hoje</h4>
+                <p class="metric">R$ 1.540,90</p>
+                <p class="detalhes">+12% que ontem</p>
+              </div>
+
+              <div class="fornecedor-card widget">
+                <h4>Pedidos Novos</h4>
+                <p class="metric">14</p>
+                <p class="detalhes">4 aguardando entrega</p>
+              </div>
+
+              <div class="fornecedor-card widget">
+                <h4>Produtos Ativos</h4>
+                <p class="metric">256</p>
+                <p class="detalhes">3 em falta no estoque</p>
+              </div>
+
+              <div
+                class="fornecedor-card widget"
+                style="border: 2px solid #ffc107"
+              >
+                <h4>Alerta de Estoque</h4>
+                <p class="metric" style="color: #ffc107">
+                  <i class="fas fa-exclamation-triangle"></i> 18
+                </p>
+                <p class="detalhes">Itens com estoque baixo</p>
+              </div>
+            </section>
+
+            <section
+              class="fornecedor-card"
+              style="margin-top: 30px; padding: 25px"
+            >
+              <h2>Últimos Pedidos</h2>
+
+              <table class="pedidos-tabela">
+                <thead>
+                  <tr>
+                    <th># Pedido</th>
+                    <th>Cliente</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#MFD00147</td>
+                    <td>João S.</td>
+                    <td>R$ 107,42</td>
+                    <td style="color: #007bff">
+                      <i class="fas fa-sync-alt"></i> Em Preparação
+                    </td>
+                    <td><a href="#">Ver</a></td>
+                  </tr>
+
+                  <tr>
+                    <td>#MFD00146</td>
+                    <td>Maria P.</td>
+                    <td>R$ 55,90</td>
+                    <td style="color: #28a745">
+                      <i class="fas fa-check"></i> Entregue
+                    </td>
+                    <td><a href="#">Ver</a></td>
+                  </tr>
+
+                  <tr>
+                    <td>#MFD00145</td>
+                    <td>Carlos A.</td>
+                    <td>R$ 210,00</td>
+                    <td style="color: #dc3545">
+                      <i class="fas fa-times"></i> Cancelado
+                    </td>
+                    <td><a href="#">Ver</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+
+          <div id="farmacia" class="content-panel">
+            <h1>Configurações da Farmácia</h1>
+            <p>
+              Aqui você pode ajustar informações gerais, horários de
+              funcionamento, taxas de entrega e áreas de atuação.
+            </p>
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Dados Básicos</h3>
+              <p>Conteúdo do formulário de edição de dados da farmácia...</p>
+            </section>
+          </div>
+
+          <div id="produtos" class="content-panel">
+            <h1>Gestão de Produtos</h1>
+            <p>
+              Visão geral de todos os produtos cadastrados e ferramentas para
+              adicionar novos itens.
+            </p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Lista de Produtos</h3>
+              <p>
+                Tabela ou grid de todos os produtos com opções de
+                Edição/Exclusão/Ativação.
+              </p>
+            </section>
+          </div>
+
+          <div id="estoque" class="content-panel">
+            <h1>Gestão de Estoque</h1>
+            <p>
+              Controle de níveis de estoque, alertas de baixo estoque e ajustes
+              rápidos.
+            </p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Níveis de Inventário</h3>
+              <p>Tabela de itens com quantidade atual e limite de segurança.</p>
+            </section>
+          </div>
+
+          <div id="pedidos" class="content-panel">
+            <h1>Gestão de Pedidos</h1>
+            <p>
+              Monitoramento e atualização de status de todos os pedidos
+              (Pendentes, Em andamento, Entregues, Cancelados).
+            </p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Filtros de Pedidos</h3>
+              <p>Lista completa de pedidos com filtros por data e status.</p>
+            </section>
+          </div>
+
+          <div id="clientes" class="content-panel">
+            <h1>Clientes</h1>
+            <p>
+              Lista de clientes que já compraram na sua farmácia e seus dados de
+              contato.
+            </p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Lista de Clientes</h3>
+              <p>Tabela com nome, e-mail e histórico de compras.</p>
+            </section>
+          </div>
+
+          <div id="cupons" class="content-panel">
+            <h1>Cupons e Promoções</h1>
+            <p>
+              Crie, edite ou desative cupons de desconto e gerencie promoções de
+              produtos.
+            </p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Criar Novo Cupom</h3>
+              <p>Formulário para criar cupons (ex: PRIMEIRACOMPRA).</p>
+            </section>
+          </div>
+
+          <div id="relatorios" class="content-panel">
+            <h1>Relatórios</h1>
+            <p>
+              Análise de vendas, desempenho de produtos e métricas de entrega.
+            </p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Relatórios de Vendas</h3>
+              <p>Gráficos e dados de vendas por período.</p>
+            </section>
+          </div>
+
+          <div id="configuracoes" class="content-panel">
+            <h1>Configurações do Sistema</h1>
+            <p>Ajustes de usuário, segurança e preferências de notificação.</p>
+
+            <section class="fornecedor-card" style="padding: 20px">
+              <h3 class="form-title">Gerenciar Administradores</h3>
+              <p>Opções de alteração de senha e permissões.</p>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll(".sidebar-menu a");
+        const contentPanels = document.querySelectorAll(".content-panel");
+
+        function switchContent(targetId) {
+          contentPanels.forEach((panel) => panel.classList.remove("active"));
+          const target = document.getElementById(targetId);
+          if (target) target.classList.add("active");
+        }
+
+        links.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            links.forEach((l) => l.classList.remove("active-link"));
+            this.classList.add("active-link");
+
+            const target = this.getAttribute("data-target");
+            if (target) switchContent(target);
+          });
+        });
+        switchContent("dashboard");
+      });
+    </script>
+    <script src="auth.js"></script>
+  </body>
+</html>
