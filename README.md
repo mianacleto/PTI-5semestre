@@ -111,3 +111,5 @@ http://localhost:3000
 - `GET /farmacias` - Lista as farmácias disponíveis cadastradas no sistema  
 - `GET /produtos` - Lista os produtos disponíveis para consulta/compra  
 - `POST /login` - Realiza autenticação de usuário no sistema  
+
+.
