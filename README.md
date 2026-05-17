@@ -1,4 +1,4 @@
-# PTI 5º Semestre
+# PTI - 5º Semestre
 
 Projeto com frontend estático (HTML, CSS e JavaScript) consumindo uma API backend em Node.js/Express para fluxo de farmácia delivery. O frontend é servido pelo próprio backend, e os dados da aplicação são persistidos em banco SQLite.
 
